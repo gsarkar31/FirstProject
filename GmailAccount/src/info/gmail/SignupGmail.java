@@ -1,5 +1,8 @@
 package info.gmail;
 
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,19 +14,24 @@ public class SignupGmail {
 		    public static void main(String[] args){
 				
 		    	WebDriver driver = null;
-		    	WebDriverWait wdw=new WebDriverWait(driver,10);
+		    	//WebDriverWait wdw=new WebDriverWait(driver,10);
 		    	
 		    	try{
 		    		
 		    	System.setProperty("webdriver.gecko.driver", "C:\\Users\\Mazbaul\\Desktop\\BroutForce QC\\Environment Java,SE,Eclipse\\geckodriver.exe");   	
-		    	
+		    	Properties prop = new Properties();
+		    	FileInputStream fs = new FileInputStream("./ObjectRepo.properties");
+		    	//FileInputStream fs = new FileInputStream("C:\\Users\\Mazbaul\\git\\FirstProject\\GmailAccount\\ObjectRepo.properties");
+		    	prop.load(fs);
 		    	
 		    	driver= new FirefoxDriver();
-		    	driver.get("https://accounts.google.com/SignUp?");
+		    	driver.get(prop.getProperty("url"));
 		 
 		        driver.manage().window().maximize();
 		        
-		        driver.findElement(By.xpath(".//*[@id='FirstName']")).sendKeys("Brute");
+		        
+		        
+		        driver.findElement(By.xpath(prop.getProperty("FirstName"))).sendKeys("Brute");
 		        driver.findElement(By.xpath(".//*[@id='LastName']")).sendKeys("force");
 		        driver.findElement(By.xpath(".//*[@id='GmailAddress']")).sendKeys("hwbf9911");
 		        driver.findElement(By.xpath(".//*[@id='Passwd']")).sendKeys("bf098765");
@@ -46,18 +54,18 @@ public class SignupGmail {
 		        driver.findElement(By.xpath(".//*[@id=':i']")).click();
 		        driver.findElement(By.xpath(".//*[@id=':7d']/div")).click();
 		        
-		        wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='submitbutton']"))).click();
+		        //wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='submitbutton']"))).click();
 		        //driver.findElement(By.xpath(".//*[@id='submitbutton']")).click();      
 		        //driver.findElement(By.xpath(".//*[@id='submitbutton']")).click();     
 		        //Thread.sleep(5000);
 		        
      		    //driver.findElement(By.xpath(".//*[@id='tos-scroll-button']/div/img")).click();
-     		    wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='tos-scroll-button']/div/img"))).click();
+     		    //wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='tos-scroll-button']/div/img"))).click();
      		    
      		    //driver.findElement(By.xpath(".//*[@id='tos-scroll-button']/div/img")).click();
      		    
 		        //Thread.sleep(5000);
-     		    wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='cancelbutton']"))).click();
+     		    //wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='cancelbutton']"))).click();
 
 
      		    //driver.findElement(By.xpath(".//*[@id='cancelbutton']")).click();
